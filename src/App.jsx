@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import TweetForm from "./components/TweetForm";
-
+import TweetFeed from "./components/TweetFeed";
 
  function App() {
 
@@ -25,32 +25,7 @@ import TweetForm from "./components/TweetForm";
             Home Feed
           </h2>
 
-          {tweets.length === 0 ? (
-            <p className="text-gray-500">
-              No tweets yet!
-            </p>
-          ) : (
-            <ul className="space-y-4">
-              {tweets.map((tweet) => (
-                <li
-                  key={tweet.id}
-                  className="border-b border-gray-200 pb-3 last:border-none"
-                >
-                  <p className="font-semibold text-blue-600">
-                    {tweet.username}
-                  </p>
-
-                  <p>
-                    {tweet.content}
-                  </p>
-
-                  <span className=" text-sm text-gray-400">
-                    {tweet.createAt}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
+          <TweetFeed tweets={tweets} />
         </div>
       </main>
     </div>
