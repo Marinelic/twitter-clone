@@ -9,9 +9,9 @@ function TweetForm ({onTweet}) {
 
         const newTweet = {
             id: Date.now(),
-            userName: "Marin",
+            username: "Marin",
             content,
-            createAt: new Date().toLocaleDateString(),
+            createAt: new Date().toLocaleString(),
         };
 
         onTweet(newTweet);
