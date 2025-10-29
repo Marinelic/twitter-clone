@@ -1,26 +1,20 @@
 import React, { useState } from "react";
 
-    function TweetFeed({ tweets, onDelete }) {
+    function TweetFeed({ tweets, onDelete, onToggleLike }) {
       return (
           <div>
             {tweets.length === 0 ? (
                 <p className="text-pink-600 text-center">No tweets yet!</p>
             ) : (
-                tweets.map((tweet) => <Tweet key={tweet.id} tweet={tweet} onDelete={onDelete} />)
+                tweets.map((tweet) => <Tweet key={tweet.id} tweet={tweet} onDelete={onDelete} onToggleLike={onToggleLike} />)
             )}
           </div>
         );
       }
 
-      function Tweet ({tweet, onDelete}) {
-          const [likes, setLikes] = useState(0);
-          const [liked, setLiked] = useState(false);
-
-          const handleLike = () => {
-            setLiked(!liked);
-            setLikes(liked ? likes -1 : likes + 1);
-      };
-      
+      function Tweet({ tweet, onDelete, onToggleLike }) {
+        const likes = tweet.likes ?? 0;     
+        const liked = Boolean(tweet.liked); 
 
       return (
         <div className="border-b border-yellow-300 py-4">
@@ -40,7 +34,7 @@ import React, { useState } from "react";
 
           <div className="flex items-center gap-2">
               <button
-                onClick={handleLike}
+                onClick={() => onToggleLike(tweet.id)}
                 className={`flex items-center gap-1 ${liked ? "text-red-500" : "text-gray-500"}`}
               >
                 ❤️ {likes}

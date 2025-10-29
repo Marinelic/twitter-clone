@@ -8,10 +8,11 @@ function TweetForm ({onTweet}) {
         if (!content.trim()) return;
 
         const newTweet = {
-            id: Date.now(),
-            username: "Marin",
+            username: "Marinela",
             content,
             createAt: new Date().toLocaleString(),
+            likes: 0,
+            liked: false,
         };
 
         onTweet(newTweet);
