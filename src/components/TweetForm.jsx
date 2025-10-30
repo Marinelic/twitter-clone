@@ -3,14 +3,25 @@ import { useState } from "react";
 function TweetForm ({onTweet}) {
     const [content, setContent] = useState("");
 
+    // Avatar URL based on the name
+    const makeAvatar = (name) =>
+         `https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(name)}&backgroundType=gradientLinear`;
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!content.trim()) return;
 
+        const displayName = "Marinela";
+        const handle = "marinela";
+
         const newTweet = {
-            username: "Marinela",
+            displayName,
+            handle,
+            userName: displayName,
             content,
-            createAt: new Date().toLocaleString(),
+            createAt: new Date().toISOString(),
+            createAt: new Date().toISOString(),
+            avatarUrl: makeAvatar(displayName),
             likes: 0,
             liked: false,
         };
