@@ -98,14 +98,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 text-blue-400">
+    <div className="min-h-screen bg-blue-100 text-blue-400">
       <Header />
 
       <main className="pt-24 flex flex-col items-center px-4">
         <TweetForm onTweet={handleNewTweet} />
 
         <div className="w-full max-w-2xl bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-2xl font-semibold text-blue-600 mb-4">Home Feed</h2>
+          <h2 className="text-2xl font-semibold text-blue-500 mb-4">Home Feed</h2>
 
           {loading ? (
             <p className="text-center text-gray-500">Loading tweets...</p>
