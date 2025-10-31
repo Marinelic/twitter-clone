@@ -1,14 +1,38 @@
 import { useState } from "react";
 
+// Twitter-style limit
+const LIMIT = 280;
+
 function TweetForm ({onTweet}) {
     const [content, setContent] = useState("");
 
-    // Avatar URL based on the name
+   /*  // Avatar URL based on the name
     const makeAvatar = (name) =>
-         `https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(name)}&backgroundType=gradientLinear`;
+         `https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(name)}&backgroundType=gradientLinear`; */
 
+
+    // Derived helpers (auto-calculated from content)
+    const length = content.length;      // how many characters typed
+    const remaining = LIMIT - length;   // how many left
+    const isEmty = content.trim().length ===  0;
+    const tooLong = remaining < 0;
+
+    // counter color: gray → orange (near) → red (too long)
+    const counterColor =
+        tooLong ? "text-red-700"
+            : remaining <= 20 ? "text-orange-700"
+                : "text-blue-800"
+
+    // When typing in the box
+    const handleChange = (e) => {
+        setContent (e.target.value);
+    };
+
+    // When you press "Tweet"
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Stop if empty or too long
         if (!content.trim()) return;
 
         const displayName = "Marinela";
@@ -21,7 +45,7 @@ function TweetForm ({onTweet}) {
             content,
             createAt: new Date().toISOString(),
             createAt: new Date().toISOString(),
-            avatarUrl: makeAvatar(displayName),
+            /* avatarUrl: makeAvatar(displayName), */
             likes: 0,
             liked: false,
         };
@@ -29,6 +53,7 @@ function TweetForm ({onTweet}) {
         onTweet(newTweet);
         setContent("");
     };
+
 
     return (
         <form
@@ -43,12 +68,20 @@ function TweetForm ({onTweet}) {
                 rows="3"
             />
 
+              <div className="mt-2 flex items-center justify-between">
+                {/* live counter */}
+                    <span className={`text-sm ${counterColor}`}>
+                    {remaining >= 0 ? `${remaining} left` : `${-remaining} over!`}
+                    </span>
+            
+
             <button
                 type="submit"
                 className=" mt-3 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
             >
                 Tweet
             </button>
+            </div>
         </form>
     );
 }
