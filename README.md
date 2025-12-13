@@ -1,4 +1,4 @@
-A simple Twitter-like app built with React, styled with TailwindCSS, and connected to MockAPI for storing tweets online.
+A simple Twitter-clone app built with React, styled with TailwindCSS, and connected to MockAPI for storing tweets online.
 You can post, like ❤️, and delete 🗑️ tweets - and they stay saved even after refresh!
 
 
